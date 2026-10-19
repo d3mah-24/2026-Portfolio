@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-mono: var(--font-fira-code);
+  --font-sans: var(--font-inter);
+}
+
+* {
+  scrollbar-width: thin;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Light mode (default) */
+body {
+  background: #ffffff;
+  color: #1a1a1a;
+  font-family: var(--font-fira-code), ui-monospace, "Cascadia Code", "Fira Code", Menlo, Monaco, Consolas, monospace;
+}
+
+::selection {
+  background: #000000;
+  color: #ffffff;
+}
+
+/* Dark mode */
+html.dark body {
+  background: #010001;
+  color: #e5e5e5;
+}
+
+html.dark ::selection {
+  background: #ffffff;
+  color: #000000;
+}
+
+html.dark {
+  scrollbar-color: #2a2a2a #010001;
+}
+
+/* Vercel-style CSS cross marker */
+.cross-marker {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.cross-marker::before,
+.cross-marker::after {
+  content: "";
+  position: absolute;
+  background: #d4d4d4;
+}
+.cross-marker::before {
+  width: 1px;
+  height: 100%;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+.cross-marker::after {
+  height: 1px;
+  width: 100%;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+html.dark .cross-marker::before,
+html.dark .cross-marker::after {
+  background: #404040;
+}
+
+/* Vercel-style grid background */
+.grid-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 40%, transparent 100%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 40%, transparent 100%);
+}
+/* Shimmer text effect */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    #000000 0%,
+    #000000 40%,
+    #6b7280 50%,
+    #000000 60%,
+    #000000 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 8s linear infinite;
+}
+html.dark .shimmer-text {
+  background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #ffffff 40%,
+    #6b7280 50%,
+    #ffffff 60%,
+    #ffffff 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 8s linear infinite;
+}
+
+html.dark .grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
