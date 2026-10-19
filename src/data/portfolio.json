@@ -1,1 +1,273 @@
-{}
+{
+  "sectionTitles": {
+    "skills": "Technical Skills",
+    "experience": "Experience",
+    "education": "Education",
+    "projects": "Selected Projects",
+    "achievements": "Honours & Achievements",
+    "activities": "Activities & Responsibilities",
+    "contact": "Contact"
+  },
+
+  "navLinks": [
+    {
+      "href": "#skills",
+      "label": "Skills"
+    },
+    {
+      "href": "#experience",
+      "label": "Experience"
+    },
+    {
+      "href": "#projects",
+      "label": "Projects"
+    },
+    {
+      "href": "#contact",
+      "label": "Contact"
+    }
+  ],
+
+  "personal": {
+    "name": {
+      "first": "Ahmed",
+      "last": "Muhamed"
+    },
+    "title": "Software Engineer",
+    "bio": "Backend developer with professional experience building backend systems, business applications, and integrations using Python, Django, and Frappe/ERPNext. Focused on developing reliable APIs, automating business workflows, and integrating business systems.",
+    "currentWork": {},
+    "email": "aqoldiahmed@gmail.com",
+    "location": "Messina, Italy",
+    "address": {
+      "locality": "Messina",
+      "region": "Sicily",
+      "country": "IT"
+    },
+    "handle": "d3mah",
+    "gender": "",
+    "birthDate": "",
+    "birthPlace": "",
+    "nationality": "",
+    "languages": ["Amharic", "English", "Italian"],
+    "weight": null,
+    "height": null,
+    "parent": "",
+    "resumePath": "/Ahmed_Muhamed_Fentaw_Resume_2026.pdf",
+    "logoPath": "/logo.png",
+    "imagePath": "/image.jpg",
+    "navName": "Ahmed",
+    "footerName": "Ahmed Muhamed",
+    "repoUrl": "https://github.com/d3mah-24/2026-Portfolio"
+  },
+
+  "socials": [
+    {
+      "label": "GitHub",
+      "url": "https://github.com/d3mah-24"
+    }
+  ],
+
+  "secondarySocials": [],
+
+  "terminal": [
+    {
+      "prompt": "whoami",
+      "output": "Software Engineer"
+    },
+    {
+      "prompt": "pwd",
+      "output": "Messina, Italy"
+    },
+    {
+      "prompt": "cat focus.txt",
+      "output": "Python · Django · Frappe/ERPNext · REST APIs"
+    }
+  ],
+
+  "skills": {
+    "Backend": [
+      "Python",
+      "Django",
+      "Django REST Framework",
+      "Frappe",
+      "ERPNext",
+      "REST APIs"
+    ],
+    "Languages & Web": ["JavaScript", "SQL", "HTML", "CSS"],
+    "Databases & Caching": ["PostgreSQL", "MariaDB", "MySQL", "Redis"],
+    "DevOps & Infrastructure": ["Docker", "Linux", "Nginx", "Git", "GitHub"],
+    "Frontend & Integration": [
+      "Vue.js",
+      "React",
+      "Odoo",
+      "Third-Party API Integrations",
+      "Postman"
+    ]
+  },
+
+  "skillsFootnote": "Focused on reliable backend systems, practical integrations, and maintainable software.",
+
+  "experience": [
+    {
+      "company": "ZIKPRO Ltd",
+      "role": "Frappe/ERPNext Developer",
+      "period": "Oct 2025 — Aug 2026",
+      "location": "Remote, UK",
+      "tag": "Professional",
+      "points": [
+        "Develop and customize Frappe/ERPNext applications using Python, JavaScript, and Vue.js to support business workflows and international requirements.",
+        "Developed a Construction Management System with a Vue.js frontend and Frappe backend, implementing industry-specific workflows and business logic.",
+        "Implemented UK address lookup and validation using Ideal Postcodes, reducing customer address creation and validation time from approximately 2 minutes to 30 seconds.",
+        "Worked on a UK HMRC CT600 Corporation Tax integration involving tax data processing, reporting workflows, and electronic submission components; the overall integration remained unfinished.",
+        "Develop custom DocTypes, workflows, APIs, reports, and integrations using MariaDB, Docker, Git, and Linux."
+      ]
+    },
+    {
+      "company": "Haron Computer",
+      "role": "Python / ERPNext Developer",
+      "period": "Sep 2025 — Present",
+      "location": "Ethiopia",
+      "tag": "Professional",
+      "points": [
+        "Developed and customized Frappe/ERPNext applications for business domains including real estate, HRMS, point of sale, and maintenance management.",
+        "Built custom DocTypes, reports, print formats, dashboards, and workflows to support business-specific requirements.",
+        "Implemented role-based permissions, server-side scripts, and application logic to extend ERPNext functionality.",
+        "Worked on database migrations, application testing, and maintenance of existing business applications."
+      ]
+    },
+    {
+      "company": "Addis System",
+      "role": "Python Developer",
+      "period": "Oct 2023 — Feb 2024",
+      "location": "Ethiopia",
+      "tag": "Professional",
+      "points": [
+        "Developed a shipping connector using Django, Django REST Framework, and PostgreSQL to integrate backend services.",
+        "Implemented REST API functionality and API documentation using Swagger.",
+        "Customized Odoo functionality using Python and XML to support business requirements."
+      ]
+    },
+    {
+      "company": "Simba Tech Trading",
+      "role": "Backend Developer Intern",
+      "period": "Jul 2023 — Sep 2023",
+      "location": "Addis Ababa, Ethiopia",
+      "tag": "Internship",
+      "points": [
+        "Developed Django functionality for sales and product management applications.",
+        "Worked with SQL data and explored data analysis using Python libraries including Pandas and NumPy.",
+        "Implemented and maintained backend logic to support application functionality and business requirements."
+      ]
+    }
+  ],
+
+  "education": [
+    {
+      "degree": "BSc Computer Science — Data Analysis",
+      "institution": "University of Messina",
+      "location": "Messina, Italy",
+      "period": "Sep 2025 - Present",
+      "grade": "",
+      "coursework": [
+        "Data Structures and Algorithms",
+        "Object-Oriented Programming",
+        "Database Systems",
+        "Linear Algebra",
+        "Statistics and Data Processing"
+      ]
+    }
+  ],
+
+  "projects": [
+    {
+      "name": "HMRC CT600 Integration",
+      "description": "UK Corporation Tax Reporting and Submission Integration",
+      "tech": ["Python", "Frappe", "XML", "iXBRL", "REST APIs"],
+      "url": "",
+      "points": [
+        "Developed core components of an integration for processing UK Corporation Tax data and supporting CT600 reporting workflows.",
+        "Worked on XML and iXBRL document processing for tax computations and supporting accounts.",
+        "Contributed to electronic submission workflows, including HMRC Gateway interactions, submission acknowledgements, polling, and IRmark-related processing.",
+        "Completed more than 80% of the development work undertaken before leaving the project; the overall integration was not completed."
+      ]
+    },
+    {
+      "name": "Construction Management System",
+      "description": "Business Workflows and Construction Management",
+      "tech": [
+        "Python",
+        "Frappe",
+        "ERPNext",
+        "JavaScript",
+        "Vue.js",
+        "MariaDB"
+      ],
+      "url": "",
+      "points": [
+        "Developed a construction management application with a Vue.js frontend and Frappe backend.",
+        "Implemented construction-specific business logic and workflows to support operational processes.",
+        "Integrated frontend functionality with backend application services and data models."
+      ]
+    },
+    {
+      "name": "UK Address Lookup and Validation",
+      "description": "Address Validation Integration for Frappe/ERPNext",
+      "tech": [
+        "Python",
+        "Frappe",
+        "JavaScript",
+        "REST APIs",
+        "Ideal Postcodes"
+      ],
+      "url": "https://docs.ideal-postcodes.co.uk/docs/postcode-lookup/",
+      "points": [
+        "Integrated Ideal Postcodes address lookup and validation into Frappe/ERPNext customer workflows.",
+        "Reduced customer address creation and validation time from approximately 2 minutes to 30 seconds, a 75% reduction.",
+        "Improved address entry efficiency by reducing manual data entry and supporting postcode-based address lookup."
+      ]
+    },
+    {
+      "name": "Frappe/ERPNext Business Applications",
+      "description": "Custom ERP Applications and Business Process Automation",
+      "tech": ["Python", "Frappe", "ERPNext", "JavaScript", "MariaDB", "SQL"],
+      "url": "",
+      "points": [
+        "Developed and customized more than 15 Frappe applications containing over 120 DocTypes.",
+        "Built more than 20 reports and implemented business workflows across real estate, HRMS, POS, and maintenance applications.",
+        "Implemented custom permissions, print formats, scripts, and reports to extend standard ERPNext functionality.",
+        "Worked on database migrations, application maintenance, and business process automation."
+      ]
+    }
+  ],
+
+  "achievements": [
+    "Winner of DevHackathon, June 2023.",
+    "Honourable mention at the 8th Ethiopian Collegiate Programming Contest (ETHCPC).",
+    "Quarterfinalist in the A2SV Generative AI Hackathon.",
+    "Earned the HackerRank Python Basic certification in January 2023."
+  ],
+
+  "activities": [
+    {
+      "title": "Competitive Programming Organizer",
+      "description": "Ethiopian collegiate programming community",
+      "items": [
+        "Contributed to organizing collegiate programming competitions over three years.",
+        "Participated in competitive programming activities and technical problem-solving."
+      ]
+    },
+    {
+      "title": "Security & CTF Practice",
+      "description": "Application security and Capture the Flag challenges",
+      "items": [
+        "Practise Capture the Flag challenges to strengthen security analysis and problem-solving skills.",
+        "Study the OWASP Top 10 and common web application security vulnerabilities."
+      ]
+    }
+  ],
+
+  "contact": {
+    "message": "I'm interested in backend engineering opportunities and collaborating on meaningful software projects. Feel free to get in touch.",
+    "calendlyUrl": ""
+  }
+}

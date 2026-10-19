@@ -1,18 +1,21 @@
+import Link from "next/link";
 import { Nav } from "@/components/Nav";
 import { Terminal, Prompt, Output } from "@/components/Terminal";
+import { CrossLine } from "@/components/CrossLine";
 import data from "@/data/portfolio.json";
 
 export default function NotFound() {
   return (
     <div className="pt-6 pb-6">
-      <Nav />
+      <Nav
+        links={data.navLinks}
+        name={data.personal.navName}
+        resumePath={data.personal.resumePath}
+      />
 
       <main className="max-w-4xl mx-auto border-x border-neutral-200 dark:border-neutral-800 min-h-screen relative">
         <div className="hidden lg:block absolute top-0 left-0 right-0">
-          <div className="relative h-px bg-neutral-200 dark:bg-neutral-800">
-            <div className="cross-marker left-0" />
-            <div className="cross-marker left-full" />
-          </div>
+          <CrossLine />
         </div>
 
         <div className="px-5 md:px-10 pt-32 md:pt-44 pb-16 md:pb-20 flex flex-col items-center text-center relative overflow-hidden">
@@ -35,12 +38,12 @@ export default function NotFound() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-10 text-xs justify-center">
-              <a
+              <Link
                 href="/"
                 className="text-white dark:text-black bg-black dark:bg-white px-5 py-3 hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors uppercase tracking-widest text-center"
               >
                 Go Home
-              </a>
+              </Link>
               <a
                 href={`mailto:${data.personal.email}`}
                 className="text-neutral-500 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-800 px-5 py-3 hover:text-black dark:hover:text-white hover:border-neutral-400 dark:hover:border-neutral-500 transition-colors uppercase tracking-widest text-center"
@@ -52,10 +55,7 @@ export default function NotFound() {
         </div>
 
         <div className="hidden lg:block absolute bottom-0 left-0 right-0">
-          <div className="relative h-px bg-neutral-200 dark:bg-neutral-800">
-            <div className="cross-marker left-0" />
-            <div className="cross-marker left-full" />
-          </div>
+          <CrossLine />
         </div>
         <div className="lg:hidden h-px bg-neutral-200 dark:bg-neutral-800" />
       </main>

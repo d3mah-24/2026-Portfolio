@@ -27,14 +27,14 @@ Thanks for your interest in contributing! This is a personal portfolio template,
    ```
 4. **Install dependencies:**
    ```bash
-   npm install
+   pnpm install
    cp .env.example .env.local
    ```
 5. **Make your changes** and verify:
    ```bash
-   npm run dev     # Check visually
-   npm run build   # Ensure production build passes
-   npm run lint    # Ensure no lint errors
+   pnpm dev     # Check visually
+   pnpm build   # Ensure production build passes
+   pnpm lint    # Ensure no lint errors
    ```
 6. **Commit** with a clear message:
    ```bash
@@ -47,7 +47,7 @@ Thanks for your interest in contributing! This is a personal portfolio template,
 - Keep PRs small and focused on a single change
 - Describe what changed and why in the PR description
 - Include a screenshot if the change is visual
-- Ensure `npm run build` passes with no errors
+- Ensure `pnpm build` passes with no errors
 
 ## Code Style
 

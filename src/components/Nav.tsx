@@ -2,11 +2,15 @@
 
 import { useState } from "react";
 import { ThemeToggle } from "./ThemeToggle";
-import data from "@/data/portfolio.json";
+import { CrossLine } from "./CrossLine";
 
-const links = data.navLinks;
+interface NavProps {
+  links: { href: string; label: string }[];
+  name: string;
+  resumePath?: string;
+}
 
-export function Nav() {
+export function Nav({ links, name, resumePath }: NavProps) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -16,7 +20,7 @@ export function Nav() {
           href="#"
           className="text-black dark:text-white font-bold text-sm tracking-wider"
         >
-          {data.personal.navName}
+          {name}
         </a>
 
         {/* Desktop */}
@@ -31,13 +35,15 @@ export function Nav() {
             </a>
           ))}
           <ThemeToggle />
-          <a
-            href={data.personal.resumePath}
-            target="_blank"
-            className="text-xs text-white dark:text-black bg-black dark:bg-white px-4 py-1.5 hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors duration-200 uppercase tracking-widest"
-          >
-            Resume
-          </a>
+          {resumePath && (
+            <a
+              href={resumePath}
+              target="_blank"
+              className="text-xs text-white dark:text-black bg-black dark:bg-white px-4 py-1.5 hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors duration-200 uppercase tracking-widest"
+            >
+              Resume
+            </a>
+          )}
         </div>
 
         {/* Mobile toggle */}
@@ -56,10 +62,7 @@ export function Nav() {
 
       {/* Vercel-style bottom line with + markers */}
       <div className="hidden lg:block max-w-4xl mx-auto">
-        <div className="relative h-px bg-neutral-200 dark:bg-neutral-800">
-          <div className="cross-marker left-0" />
-          <div className="cross-marker left-full" />
-        </div>
+        <CrossLine />
       </div>
       <div className="lg:hidden h-px bg-neutral-200 dark:bg-neutral-800" />
 
@@ -77,13 +80,15 @@ export function Nav() {
                 {l.label}
               </a>
             ))}
-            <a
-              href={data.personal.resumePath}
-              target="_blank"
-              className="text-xs text-white dark:text-black bg-black dark:bg-white px-4 py-3 hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors uppercase tracking-widest w-fit mt-2"
-            >
-              Resume
-            </a>
+            {resumePath && (
+              <a
+                href={resumePath}
+                target="_blank"
+                className="text-xs text-white dark:text-black bg-black dark:bg-white px-4 py-3 hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors uppercase tracking-widest w-fit mt-2"
+              >
+                Resume
+              </a>
+            )}
           </div>
         </div>
       )}

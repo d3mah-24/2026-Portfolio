@@ -3,12 +3,12 @@
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000?logo=vercel)](https://olifarhaan.me)
+[![Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000?logo=vercel)](https://vercel.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 A minimal, monochrome developer portfolio built with Next.js, Tailwind CSS, and TypeScript. All content is driven from a single `portfolio.json` file — fork it, update the JSON, and deploy your own.
 
-**Live:** [olifarhaan.me](https://olifarhaan.me)
+Based on [OliFarhaan/backend-portfolio](https://github.com/OliFarhaan/backend-portfolio).
 
 ## Features
 
@@ -18,7 +18,6 @@ A minimal, monochrome developer portfolio built with Next.js, Tailwind CSS, and 
 - **LLM-friendly** — Dynamic `/llms.txt` route auto-generated from `portfolio.json`. When LLM crawlers visit your site, they get a structured, always-up-to-date summary of your profile (see [LLM Discoverability](#seo--llm-discoverability)).
 - **OG image** — Auto-generated at build time from your portfolio data using Next.js `ImageResponse`.
 - **Vercel Analytics** — Speed Insights + Web Analytics built in.
-- **Voice assistant widget** — Optional [Ringg.ai](https://ringg.ai) integration for an AI-powered voice agent on your portfolio.
 - **Responsive** — Mobile-first design with monospace typography.
 - **Subtle design touches** — Vercel-style grid background, shimmer text animation on the hero name.
 
@@ -26,8 +25,8 @@ A minimal, monochrome developer portfolio built with Next.js, Tailwind CSS, and 
 
 ```bash
 # Clone the repo
-git clone https://github.com/OliFarhaan/backend-portfolio.git
-cd backend-portfolio
+git clone https://github.com/d3mah-24/2026-Portfolio.git
+cd 2026-Portfolio
 
 # Install dependencies
 pnpm install
@@ -148,8 +147,7 @@ Replace `Fira_Code` with any monospace font from [Google Fonts](https://fonts.go
 
 | Variable | Required | Description |
 |---|---|---|
-| `SITE_URL` | Yes | Your production domain (e.g., `https://yourdomain.com`). Used for SEO metadata, sitemap, robots.txt, OG image, and llms.txt. |
-| `RINGG_AGENT_API_KEY` | No | API key for the Ringg.ai voice assistant widget. Remove if not using. |
+| `SITE_URL` | On Vercel: no | Your production domain (e.g., `https://yourdomain.com`). Falls back to Vercel's production domain, then `http://localhost:3000`. Used for SEO metadata, sitemap, robots.txt, OG image, and llms.txt. |
 
 Set these in `.env.local` for local development and in your Vercel project settings for production.
 
@@ -167,15 +165,20 @@ src/
 │   ├── robots.ts            # robots.txt configuration
 │   └── sitemap.ts           # Sitemap configuration
 ├── components/
+│   ├── CrossLine.tsx        # Divider line with + markers
 │   ├── Nav.tsx              # Responsive navbar with mobile menu
 │   ├── Section.tsx          # Reusable section wrapper
 │   ├── Terminal.tsx         # Terminal-style component in hero
 │   └── ThemeToggle.tsx      # Dark mode toggle (useSyncExternalStore)
 ├── data/
 │   └── portfolio.json       # All portfolio content
+├── lib/
+│   ├── portfolio.ts         # Typed helpers over portfolio.json
+│   └── site.ts              # Site URL (SITE_URL / Vercel production domain)
 public/
-├── logo.png                 # Logo used in widget and OG
-└── resume.pdf               # Downloadable resume
+├── logo.png                 # Apple touch icon (180×180)
+├── image.jpg                # Profile photo (personal.imagePath)
+└── <your-resume>.pdf        # Downloadable resume (personal.resumePath)
 ```
 
 ## SEO & LLM Discoverability
@@ -215,4 +218,4 @@ pnpm start
 
 ## License
 
-MIT — fork it, make it yours.
+MIT — see [LICENSE](LICENSE). Original template © Ali Farhan.

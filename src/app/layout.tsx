@@ -4,6 +4,8 @@ import "./globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import data from "@/data/portfolio.json";
+import { siteUrl } from "@/lib/site";
+import { currentWork } from "@/lib/portfolio";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -16,10 +18,30 @@ const firaCode = Fira_Code({
   weight: ["300", "400", "500", "600", "700"],
 });
 
-const siteUrl = process.env.SITE_URL || "https://localhost:3000";
-
 const fullName = `${data.personal.name.first} ${data.personal.name.last}`;
 const pageTitle = `${fullName} | ${data.personal.title}`;
+const MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+
+// "Sep 2025" → "2025-09", "2024" → "2024"; anything else (e.g. "Present") → undefined
+function toIsoDate(value: string) {
+  const year = value.match(/\b(\d{4})\b/)?.[1];
+  if (!year) return undefined;
+  const month = MONTHS.indexOf(value.trim().slice(0, 3).toLowerCase());
+  return month === -1 ? year : `${year}-${String(month + 1).padStart(2, "0")}`;
+}
+
+// "Sep 2025 - Present" / "Feb 2024 — Sep 2025" / "2024" → ISO start and (optional) end
+function parsePeriod(period: string) {
+  const [start, end] = period.split(/\s+[—–-]\s+/);
+  const startDate = toIsoDate(start);
+  const endDate = end && toIsoDate(end);
+  return {
+    ...(startDate && { startDate }),
+    ...(endDate && { endDate }),
+  };
+}
+
+const { address, handle } = data.personal;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -28,15 +50,15 @@ export const metadata: Metadata = {
   authors: [{ name: fullName }],
   creator: fullName,
   keywords: [
-    "Ali Farhan",
-    "Ali Farhan portfolio",
-    "Ali Farhan software engineer",
-    "olifarhaan",
-    "backend engineer",
-    "software engineer",
-    "founding engineer",
-    "freelance backend engineer",
-    "freelance software engineer",
+    fullName,
+    `${fullName} portfolio`,
+    `${fullName} ${data.personal.title}`,
+    "python backend developer",
+    "backend developer",
+    "Software Engineer",
+    "django developer",
+    "frappe developer",
+    "erpnext developer",
   ],
   alternates: {
     canonical: siteUrl,
@@ -85,7 +107,12 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Information" />
+        <link
+          rel="alternate"
+          type="text/plain"
+          href="/llms.txt"
+          title="LLM Information"
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -105,7 +132,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebSite",
               name: fullName,
-              alternateName: "OliFarhaan",
+              ...(handle && { alternateName: handle }),
               url: siteUrl,
               description: data.personal.bio,
               inLanguage: "en-US",
@@ -126,56 +153,80 @@ export default function RootLayout({
               name: fullName,
               givenName: data.personal.name.first,
               familyName: data.personal.name.last,
-              alternateName: "OliFarhaan",
+              ...(handle && { alternateName: handle }),
               url: siteUrl,
-              image: `${siteUrl}${data.personal.imagePath}`,
+              ...(data.personal.imagePath && {
+                image: `${siteUrl}${data.personal.imagePath}`,
+              }),
               jobTitle: data.personal.title,
               hasOccupation: {
                 "@type": "Occupation",
                 name: data.personal.title,
-                occupationLocation: {
+                ...(data.personal.nationality && {
+                  occupationLocation: {
+                    "@type": "Country",
+                    name: data.personal.nationality,
+                  },
+                }),
+              },
+              ...(currentWork.company && {
+                worksFor: {
+                  "@type": "Organization",
+                  name: currentWork.company,
+                  ...(currentWork.url && { url: currentWork.url }),
+                },
+              }),
+              description: data.personal.bio,
+              email: `mailto:${data.personal.email}`,
+              ...(data.personal.gender && { gender: data.personal.gender }),
+              ...(data.personal.birthDate && {
+                birthDate: data.personal.birthDate,
+              }),
+              ...(data.personal.birthPlace && {
+                birthPlace: {
+                  "@type": "Place",
+                  name: data.personal.birthPlace,
+                },
+              }),
+              ...(data.personal.nationality && {
+                nationality: {
                   "@type": "Country",
                   name: data.personal.nationality,
                 },
-              },
-              worksFor: {
-                "@type": "Organization",
-                name: data.personal.currentWork.company,
-                url: data.personal.currentWork.url,
-              },
-              description: data.personal.bio,
-              email: `mailto:${data.personal.email}`,
-              gender: data.personal.gender,
-              birthDate: data.personal.birthDate,
-              birthPlace: {
-                "@type": "Place",
-                name: data.personal.birthPlace,
-              },
-              nationality: {
-                "@type": "Country",
-                name: data.personal.nationality,
-              },
+              }),
               knowsLanguage: data.personal.languages,
-              height: {
-                "@type": "QuantitativeValue",
-                value: data.personal.height,
-                unitCode: "CMT",
-              },
-              weight: {
-                "@type": "QuantitativeValue",
-                value: data.personal.weight,
-                unitCode: "KGM",
-              },
-              parent: {
-                "@type": "Person",
-                name: data.personal.parent,
-              },
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: "Bangalore",
-                addressRegion: "Karnataka",
-                addressCountry: "IN",
-              },
+              ...(data.personal.height
+                ? {
+                    height: {
+                      "@type": "QuantitativeValue",
+                      value: data.personal.height,
+                      unitCode: "CMT",
+                    },
+                  }
+                : {}),
+              ...(data.personal.weight
+                ? {
+                    weight: {
+                      "@type": "QuantitativeValue",
+                      value: data.personal.weight,
+                      unitCode: "KGM",
+                    },
+                  }
+                : {}),
+              ...(data.personal.parent && {
+                parent: {
+                  "@type": "Person",
+                  name: data.personal.parent,
+                },
+              }),
+              ...(address && {
+                address: {
+                  "@type": "PostalAddress",
+                  addressLocality: address.locality,
+                  addressRegion: address.region,
+                  addressCountry: address.country,
+                },
+              }),
               workLocation: {
                 "@type": "Place",
                 name: data.personal.location,
@@ -193,10 +244,9 @@ export default function RootLayout({
                     name: e.institution,
                     address: e.location,
                   },
-                  startDate: e.period.split(" — ")[0],
-                  endDate: e.period.split(" — ")[1] || e.period,
+                  ...parsePeriod(e.period),
                   roleName: e.degree,
-                })
+                }),
               ),
               hasCredential: data.education.map(
                 (e: { degree: string; institution: string }) => ({
@@ -207,7 +257,7 @@ export default function RootLayout({
                     "@type": "EducationalOrganization",
                     name: e.institution,
                   },
-                })
+                }),
               ),
               knowsAbout: Object.values(data.skills).flat(),
               skills: Object.values(data.skills).flat(),
@@ -223,39 +273,6 @@ export default function RootLayout({
         {children}
         <SpeedInsights />
         <Analytics />
-        {process.env.RINGG_AGENT_API_KEY && (
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                function loadAgentsCdn(e,t){let n=document.createElement("link");n.rel="stylesheet",n.type="text/css",n.href="https://cdn.jsdelivr.net/npm/@desivocal/agents-cdn@"+e+"/dist/style.css";var a=document.createElement("script");a.type="text/javascript",a.readyState?a.onreadystatechange=function(){"loaded"!==a.readyState&&"complete"!==a.readyState||(a.onreadystatechange=null,t())}:a.onload=function(){t()},a.src="https://cdn.jsdelivr.net/npm/@desivocal/agents-cdn@"+e+"/dist/dv-agent.es.js",document.getElementsByTagName("head")[0].appendChild(n),document.getElementsByTagName("head")[0].appendChild(a)}
-                function initRingg() { loadAgentsCdn("1.0.20-alpha.59", function () {
-                  loadAgent({
-                    agentId: "41d33635-737f-427d-994a-6f904dd4c483",
-                    xApiKey: "${process.env.RINGG_AGENT_API_KEY}",
-                    variables: {},
-                    theme: {"primaryColor":"#18181b","primaryTextColor":"#ffffff","backgroundColor":"#ffffff","surfaceColor":"#f4f4f5","textColor":"#18181b","borderColor":"#e4e4e7","buttonStyle":"rounded","borderRadius":"20px"},
-                    title: "Ali's Assistant",
-                    description: "Talk to Ali's AI assistant — ask about his work, skills, or anything on this portfolio.",
-                    logoUrl: "${process.env.SITE_URL || ''}${data.personal.logoPath}",
-                    buttons: {
-                      modalTrigger: {
-                        styles: {
-                          boxShadow: "0 2px 8px rgba(0,0,0,0.12), 0 8px 24px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.04)"
-                        }
-                      }
-                    }
-                  });
-                  setTimeout(function() {
-                    var btn = document.querySelector('[class*="ringg_ai-h-14"]');
-                    if (btn) btn.click();
-                  }, 1500);
-                }); }
-                if (document.readyState === 'complete') { setTimeout(initRingg, 100); }
-                else { window.addEventListener('load', function() { setTimeout(initRingg, 100); }); }
-              `,
-            }}
-          />
-        )}
       </body>
     </html>
   );

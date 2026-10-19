@@ -1,11 +1,12 @@
 import data from "@/data/portfolio.json";
+import { siteUrl } from "@/lib/site";
+import { currentWork as work } from "@/lib/portfolio";
 
 export const dynamic = "force-static";
 
 export function GET() {
   const p = data.personal;
   const fullName = `${p.name.first} ${p.name.last}`;
-  const siteUrl = process.env.SITE_URL || "https://localhost:3000";
 
   const lines: string[] = [
     `# ${fullName}`,
@@ -14,14 +15,26 @@ export function GET() {
     "",
     "## About",
     "",
-    `${fullName} is a software engineer specializing in backend systems, distributed infrastructure, and developer tooling. He has been a founding engineer at two early-stage startups, where he owned end-to-end backend architecture from day one.`,
+    `${fullName} is a Backend Software Engineer with experience building backend systems, business applications, and integrations using Python, Django, and Frappe/ERPNext. His work includes REST APIs, business process automation, ERP customization, and third-party system integrations.`,
     "",
-    `${p.currentWork.text} [${p.currentWork.company}](${p.currentWork.url}). ${data.contact.message}`,
+    [
+      ...(work.company
+        ? [
+            [
+              work.text,
+              work.url ? `[${work.company}](${work.url})` : work.company,
+            ]
+              .filter(Boolean)
+              .join(" ") + ".",
+          ]
+        : []),
+      data.contact.message,
+    ].join(" "),
     "",
     `- Website: ${siteUrl}`,
     `- Email: ${p.email}`,
     `- Location: ${p.location}`,
-    `- Resume: ${siteUrl}${p.resumePath}`,
+    ...(p.resumePath ? [`- Resume: ${siteUrl}${p.resumePath}`] : []),
     "",
     "## Links",
     "",
@@ -47,17 +60,18 @@ export function GET() {
     "",
     ...data.education.flatMap((e) => [
       `### ${e.degree} — ${e.institution}`,
-      `${e.period} | ${e.location} | ${e.grade}`,
+      [e.period, e.location, e.grade].filter(Boolean).join(" | "),
       "",
-      `Coursework: ${e.coursework.join(", ")}`,
-      "",
+      ...(e.coursework?.length
+        ? [`Coursework: ${e.coursework.join(", ")}`, ""]
+        : []),
     ]),
     "## Projects",
     "",
     ...data.projects.flatMap((proj) => [
       `### ${proj.name} — ${proj.description}`,
       `Tech: ${proj.tech.join(", ")}`,
-      `GitHub: ${proj.url}`,
+      ...(proj.url ? [`Link: ${proj.url}`] : []),
       "",
       ...proj.points.map((pt) => `- ${pt}`),
       "",
@@ -80,7 +94,9 @@ export function GET() {
     data.contact.message,
     "",
     `- Email: ${p.email}`,
-    `- Schedule a call: ${data.contact.calendlyUrl}`,
+    ...(data.contact.calendlyUrl
+      ? [`- Schedule a call: ${data.contact.calendlyUrl}`]
+      : []),
     "",
     "## Source Code",
     "",
