@@ -8,8 +8,6 @@
 
 A minimal, monochrome developer portfolio built with Next.js, Tailwind CSS, and TypeScript. All content is driven from one JSON file per language (English and Italian) — fork it, update the JSON, and deploy your own.
 
-Based on [OliFarhaan/backend-portfolio](https://github.com/OliFarhaan/backend-portfolio).
-
 ## Features
 
 - **JSON-driven content** — All portfolio data lives in `src/data/portfolio.en.json` and `src/data/portfolio.it.json`. No need to touch components.
@@ -48,19 +46,19 @@ Open [http://localhost:3000](http://localhost:3000) to see the result.
 
 All content is in [`src/data/portfolio.en.json`](src/data/portfolio.en.json) and its Italian twin [`src/data/portfolio.it.json`](src/data/portfolio.it.json). Both files must have the same structure and the same facts (dates, URLs, companies, tech stacks) — only human-readable text differs. Run `pnpm validate:i18n` after editing them. Update these sections to make it yours:
 
-| Section | Description |
-|---|---|
-| `personal` | Name, title, bio, email, location, resume path, logo, repo URL |
-| `socials` | GitHub, LinkedIn, YouTube, Medium, LeetCode (or any links) |
-| `terminal` | Custom terminal lines shown in the hero section |
-| `skills` | Categorized skill lists |
-| `experience` | Work history with company, role, period, and bullet points |
-| `education` | Degrees, institutions, grades, coursework |
-| `projects` | Project name, description, tech stack, GitHub URL, bullet points |
-| `achievements` | List of achievements/honours |
-| `activities` | Activities, volunteering, freelancing, writing |
-| `contact` | Contact message and Calendly URL |
-| `navLinks` | Controls which sections appear in the navbar |
+| Section        | Description                                                      |
+| -------------- | ---------------------------------------------------------------- |
+| `personal`     | Name, title, bio, email, location, resume path, logo, repo URL   |
+| `socials`      | GitHub, LinkedIn, YouTube, Medium, LeetCode (or any links)       |
+| `terminal`     | Custom terminal lines shown in the hero section                  |
+| `skills`       | Categorized skill lists                                          |
+| `experience`   | Work history with company, role, period, and bullet points       |
+| `education`    | Degrees, institutions, grades, coursework                        |
+| `projects`     | Project name, description, tech stack, GitHub URL, bullet points |
+| `achievements` | List of achievements/honours                                     |
+| `activities`   | Activities, volunteering, freelancing, writing                   |
+| `contact`      | Contact message and Calendly URL                                 |
+| `navLinks`     | Controls which sections appear in the navbar                     |
 
 The resume PDF goes in `public/` — update the `resumePath` field in the JSON to match.
 
@@ -146,8 +144,8 @@ Replace `Fira_Code` with any monospace font from [Google Fonts](https://fonts.go
 
 ### Environment Variables
 
-| Variable | Required | Description |
-|---|---|---|
+| Variable   | Required      | Description                                                                                                                                                                                          |
+| ---------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `SITE_URL` | On Vercel: no | Your production domain (e.g., `https://yourdomain.com`). Falls back to Vercel's production domain, then `http://localhost:3000`. Used for SEO metadata, sitemap, robots.txt, OG image, and llms.txt. |
 
 Set these in `.env.local` for local development and in your Vercel project settings for production.
