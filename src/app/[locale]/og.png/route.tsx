@@ -1,13 +1,25 @@
 import { ImageResponse } from "next/og";
-import data from "@/data/portfolio.json";
+import { locales, resolveLocale } from "@/lib/i18n";
+import { getPortfolio } from "@/lib/portfolio";
 
 export const dynamic = "force-static";
-export const alt = `${data.personal.name.first} ${data.personal.name.last} — ${data.personal.title}`;
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+export const dynamicParams = false;
 
-export default function OGImage() {
-  const { personal } = data;
+// Referenced (with a localized alt) from the og:image / twitter:image tags in
+// [locale]/layout.tsx. A plain route rather than opengraph-image.tsx, because
+// that convention can't give each locale its own alt text.
+const ogImageSize = { width: 1200, height: 630 };
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
+// One image per locale, so the bio matches the page language: /en/og.png, /it/og.png
+export async function GET(
+  _request: Request,
+  { params }: { params: Promise<{ locale: string }> },
+) {
+  const { personal } = getPortfolio(await resolveLocale(params));
 
   return new ImageResponse(
     (
@@ -83,6 +95,6 @@ export default function OGImage() {
         </div>
       </div>
     ),
-    { ...size },
+    { ...ogImageSize },
   );
 }
