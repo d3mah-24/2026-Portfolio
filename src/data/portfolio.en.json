@@ -1,4 +1,52 @@
 {
+  "seo": {
+    "ogLocale": "en_US",
+    "keywords": [
+      "Ahmed Muhamed",
+      "Ahmed Muhamed portfolio",
+      "Ahmed Muhamed Backend Software Engineer",
+      "python backend developer",
+      "backend developer",
+      "backend software engineer",
+      "django developer",
+      "frappe developer",
+      "erpnext developer"
+    ]
+  },
+
+  "ui": {
+    "contactCta": "Contact",
+    "workCta": "My Work",
+    "coursework": "Coursework",
+    "scheduleCall": "Schedule a call",
+    "madeBy": "Made with love by",
+    "resume": "Resume",
+    "menuOpen": "menu",
+    "menuClose": "close",
+    "toggleMenu": "Toggle menu",
+    "toggleTheme": "Toggle theme",
+    "language": "Language"
+  },
+
+  "llms": {
+    "about": "About",
+    "links": "Links",
+    "website": "Website",
+    "email": "Email",
+    "location": "Location",
+    "resume": "Resume",
+    "tech": "Tech",
+    "link": "Link",
+    "readMore": "Read more",
+    "scheduleCall": "Schedule a call",
+    "sourceCode": "Source Code",
+    "sourceCodeText": "This portfolio is open source:",
+    "versions": {
+      "en": "English version",
+      "it": "Italian version"
+    }
+  },
+
   "sectionTitles": {
     "skills": "Technical Skills",
     "experience": "Experience",
@@ -33,8 +81,9 @@
       "first": "Ahmed",
       "last": "Muhamed"
     },
-    "title": "Software Engineer",
+    "title": "Backend Software Engineer",
     "bio": "Backend developer with professional experience building backend systems, business applications, and integrations using Python, Django, and Frappe/ERPNext. Focused on developing reliable APIs, automating business workflows, and integrating business systems.",
+    "about": "Ahmed Muhamed is a Backend Software Engineer with experience building backend systems, business applications, and integrations using Python, Django, and Frappe/ERPNext. His work includes REST APIs, business process automation, ERP customization, and third-party system integrations.",
     "currentWork": {},
     "email": "aqoldiahmed@gmail.com",
     "location": "Messina, Italy",
@@ -53,6 +102,7 @@
     "height": null,
     "parent": "",
     "resumePath": "/Ahmed_Muhamed_Fentaw_Resume_2026.pdf",
+    "resumeLang": "en",
     "logoPath": "/logo.png",
     "imagePath": "/image.jpg",
     "navName": "Ahmed",
@@ -72,7 +122,7 @@
   "terminal": [
     {
       "prompt": "whoami",
-      "output": "Software Engineer"
+      "output": "Backend Software Engineer"
     },
     {
       "prompt": "pwd",

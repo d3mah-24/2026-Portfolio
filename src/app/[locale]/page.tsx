@@ -2,8 +2,8 @@ import { Nav } from "@/components/Nav";
 import { Terminal, Prompt, Output } from "@/components/Terminal";
 import { Section } from "@/components/Section";
 import { CrossLine } from "@/components/CrossLine";
-import data from "@/data/portfolio.json";
-import { currentWork } from "@/lib/portfolio";
+import { resolveLocale } from "@/lib/i18n";
+import { getCurrentWork, getPortfolio } from "@/lib/portfolio";
 
 type Activity = {
   title: string;
@@ -12,8 +12,16 @@ type Activity = {
   items?: string[];
 };
 
-export default function Home() {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const locale = await resolveLocale(params);
+  const data = getPortfolio(locale);
+  const currentWork = getCurrentWork(data);
   const {
+    ui,
     sectionTitles,
     personal,
     socials,
@@ -31,9 +39,12 @@ export default function Home() {
   return (
     <div className="pt-6 pb-6">
       <Nav
+        locale={locale}
         links={data.navLinks}
         name={personal.navName}
         resumePath={personal.resumePath}
+        resumeLang={personal.resumeLang}
+        ui={ui}
       />
 
       <main className="max-w-4xl mx-auto border-x border-neutral-200 dark:border-neutral-800 min-h-screen relative">
@@ -103,13 +114,13 @@ export default function Home() {
                   href="#contact"
                   className="text-white dark:text-black bg-black dark:bg-white px-5 py-3 hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors uppercase tracking-widest text-center sm:w-auto"
                 >
-                  Contact
+                  {ui.contactCta}
                 </a>
                 <a
                   href="#experience"
                   className="text-neutral-500 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-800 px-5 py-3 hover:text-black dark:hover:text-white hover:border-neutral-400 dark:hover:border-neutral-500 transition-colors uppercase tracking-widest text-center sm:w-auto"
                 >
-                  My Work
+                  {ui.workCta}
                 </a>
               </div>
 
@@ -227,7 +238,7 @@ export default function Home() {
                   {edu.coursework && (
                     <div className="mt-6 pt-6 border-t border-neutral-200 dark:border-neutral-800">
                       <h4 className="text-[11px] text-neutral-400 dark:text-neutral-500 uppercase tracking-[0.2em] mb-3">
-                        Coursework
+                        {ui.coursework}
                       </h4>
                       <div className="flex flex-wrap gap-x-4 gap-y-2">
                         {edu.coursework.map((course) => (
@@ -408,7 +419,7 @@ export default function Home() {
                     rel="noopener noreferrer"
                     className="text-black dark:text-white text-xs uppercase tracking-widest hover:text-neutral-500 dark:hover:text-neutral-400 transition-colors underline underline-offset-4"
                   >
-                    Schedule a call ↗
+                    {ui.scheduleCall} ↗
                   </a>
                 )}
               </div>
@@ -437,7 +448,7 @@ export default function Home() {
 
       <footer className="max-w-4xl mx-auto text-center py-8 space-y-2">
         <p className="text-neutral-400 dark:text-neutral-600 text-[11px] tracking-widest uppercase">
-          Made with love by {personal.footerName} &copy;{" "}
+          {ui.madeBy} {personal.footerName} &copy;{" "}
           {new Date().getFullYear()}
         </p>
       </footer>

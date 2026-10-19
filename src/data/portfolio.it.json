@@ -1,0 +1,307 @@
+{
+  "seo": {
+    "ogLocale": "it_IT",
+    "keywords": [
+      "Ahmed Muhamed",
+      "Ahmed Muhamed portfolio",
+      "Ahmed Muhamed Backend Software Engineer",
+      "sviluppatore backend python",
+      "sviluppatore backend",
+      "backend software engineer",
+      "sviluppatore django",
+      "sviluppatore frappe",
+      "sviluppatore erpnext"
+    ]
+  },
+  "ui": {
+    "contactCta": "Contatti",
+    "workCta": "Il mio lavoro",
+    "coursework": "Insegnamenti",
+    "scheduleCall": "Prenota una chiamata",
+    "madeBy": "Realizzato con amore da",
+    "resume": "CV",
+    "menuOpen": "menu",
+    "menuClose": "chiudi",
+    "toggleMenu": "Apri o chiudi il menu",
+    "toggleTheme": "Cambia tema",
+    "language": "Lingua"
+  },
+  "llms": {
+    "about": "Profilo",
+    "links": "Link",
+    "website": "Sito web",
+    "email": "Email",
+    "location": "Località",
+    "resume": "CV",
+    "tech": "Tecnologie",
+    "link": "Link",
+    "readMore": "Approfondisci",
+    "scheduleCall": "Prenota una chiamata",
+    "sourceCode": "Codice sorgente",
+    "sourceCodeText": "Questo portfolio è open source:",
+    "versions": {
+      "en": "Versione inglese",
+      "it": "Versione italiana"
+    }
+  },
+  "sectionTitles": {
+    "skills": "Competenze tecniche",
+    "experience": "Esperienza",
+    "education": "Formazione",
+    "projects": "Progetti selezionati",
+    "achievements": "Riconoscimenti e risultati",
+    "activities": "Attività e responsabilità",
+    "contact": "Contatti"
+  },
+  "navLinks": [
+    {
+      "href": "#skills",
+      "label": "Competenze"
+    },
+    {
+      "href": "#experience",
+      "label": "Esperienza"
+    },
+    {
+      "href": "#projects",
+      "label": "Progetti"
+    },
+    {
+      "href": "#contact",
+      "label": "Contatti"
+    }
+  ],
+  "personal": {
+    "name": {
+      "first": "Ahmed",
+      "last": "Muhamed"
+    },
+    "title": "Backend Software Engineer",
+    "bio": "Sviluppatore backend con esperienza professionale nella realizzazione di sistemi backend, applicazioni gestionali e integrazioni con Python, Django e Frappe/ERPNext. Focalizzato sullo sviluppo di API affidabili, sull'automazione dei flussi di lavoro aziendali e sull'integrazione tra sistemi aziendali.",
+    "about": "Ahmed Muhamed è un Backend Software Engineer con esperienza nella realizzazione di sistemi backend, applicazioni gestionali e integrazioni con Python, Django e Frappe/ERPNext. Il suo lavoro comprende REST API, automazione dei processi aziendali, personalizzazione di ERP e integrazioni con sistemi di terze parti.",
+    "currentWork": {},
+    "email": "aqoldiahmed@gmail.com",
+    "location": "Messina, Italia",
+    "address": {
+      "locality": "Messina",
+      "region": "Sicilia",
+      "country": "IT"
+    },
+    "handle": "d3mah",
+    "gender": "",
+    "birthDate": "",
+    "birthPlace": "",
+    "nationality": "",
+    "languages": ["Amarico", "Inglese", "Italiano"],
+    "weight": null,
+    "height": null,
+    "parent": "",
+    "resumePath": "/Ahmed_Muhamed_Fentaw_Resume_2026.pdf",
+    "resumeLang": "en",
+    "logoPath": "/logo.png",
+    "imagePath": "/image.jpg",
+    "navName": "Ahmed",
+    "footerName": "Ahmed Muhamed",
+    "repoUrl": "https://github.com/d3mah-24/2026-Portfolio"
+  },
+  "socials": [
+    {
+      "label": "GitHub",
+      "url": "https://github.com/d3mah-24"
+    }
+  ],
+  "secondarySocials": [],
+  "terminal": [
+    {
+      "prompt": "whoami",
+      "output": "Backend Software Engineer"
+    },
+    {
+      "prompt": "pwd",
+      "output": "Messina, Italia"
+    },
+    {
+      "prompt": "cat focus.txt",
+      "output": "Python · Django · Frappe/ERPNext · REST APIs"
+    }
+  ],
+  "skills": {
+    "Backend": [
+      "Python",
+      "Django",
+      "Django REST Framework",
+      "Frappe",
+      "ERPNext",
+      "REST APIs"
+    ],
+    "Linguaggi e web": ["JavaScript", "SQL", "HTML", "CSS"],
+    "Database e caching": ["PostgreSQL", "MariaDB", "MySQL", "Redis"],
+    "DevOps e infrastruttura": ["Docker", "Linux", "Nginx", "Git", "GitHub"],
+    "Frontend e integrazioni": [
+      "Vue.js",
+      "React",
+      "Odoo",
+      "Integrazioni con API di terze parti",
+      "Postman"
+    ]
+  },
+  "skillsFootnote": "Focalizzato su sistemi backend affidabili, integrazioni concrete e software manutenibile.",
+  "experience": [
+    {
+      "company": "ZIKPRO Ltd",
+      "role": "Sviluppatore Frappe/ERPNext",
+      "period": "Ott 2025 — Ago 2026",
+      "location": "Da remoto, Regno Unito",
+      "tag": "Professionale",
+      "points": [
+        "Sviluppo e personalizzazione di applicazioni Frappe/ERPNext con Python, JavaScript e Vue.js a supporto dei flussi di lavoro aziendali e di requisiti internazionali.",
+        "Sviluppo di un sistema di gestione per l'edilizia (Construction Management System) con frontend Vue.js e backend Frappe, con implementazione di flussi di lavoro e logica di business specifici del settore.",
+        "Implementazione della ricerca e validazione degli indirizzi del Regno Unito con Ideal Postcodes, riducendo il tempo di creazione e validazione degli indirizzi dei clienti da circa 2 minuti a 30 secondi.",
+        "Lavoro su un'integrazione con l'HMRC del Regno Unito per la Corporation Tax (CT600), comprendente elaborazione dei dati fiscali, flussi di reporting e componenti di invio telematico; l'integrazione nel suo complesso non è stata completata.",
+        "Sviluppo di DocType personalizzati, workflow, API, report e integrazioni con MariaDB, Docker, Git e Linux."
+      ]
+    },
+    {
+      "company": "Haron Computer",
+      "role": "Sviluppatore Python / ERPNext",
+      "period": "Set 2025 — In corso",
+      "location": "Etiopia",
+      "tag": "Professionale",
+      "points": [
+        "Sviluppo e personalizzazione di applicazioni Frappe/ERPNext per diversi ambiti aziendali, tra cui immobiliare, HRMS, punto vendita e gestione della manutenzione.",
+        "Realizzazione di DocType personalizzati, report, formati di stampa, dashboard e workflow per esigenze aziendali specifiche.",
+        "Implementazione di permessi basati sui ruoli, script lato server e logica applicativa per estendere le funzionalità di ERPNext.",
+        "Attività di migrazione dei database, test applicativi e manutenzione di applicazioni aziendali esistenti."
+      ]
+    },
+    {
+      "company": "Addis System",
+      "role": "Sviluppatore Python",
+      "period": "Ott 2023 — Feb 2024",
+      "location": "Etiopia",
+      "tag": "Professionale",
+      "points": [
+        "Sviluppo di un connettore per le spedizioni con Django, Django REST Framework e PostgreSQL per l'integrazione di servizi backend.",
+        "Implementazione di funzionalità REST API e della relativa documentazione con Swagger.",
+        "Personalizzazione di funzionalità Odoo con Python e XML per soddisfare i requisiti aziendali."
+      ]
+    },
+    {
+      "company": "Simba Tech Trading",
+      "role": "Tirocinante sviluppatore backend",
+      "period": "Lug 2023 — Set 2023",
+      "location": "Addis Abeba, Etiopia",
+      "tag": "Tirocinio",
+      "points": [
+        "Sviluppo di funzionalità Django per applicazioni di gestione delle vendite e dei prodotti.",
+        "Lavoro con dati SQL ed esplorazione dell'analisi dei dati con librerie Python, tra cui Pandas e NumPy.",
+        "Implementazione e manutenzione della logica backend a supporto delle funzionalità applicative e dei requisiti aziendali."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Laurea triennale in Informatica — Data Analysis",
+      "institution": "Università degli Studi di Messina",
+      "location": "Messina, Italia",
+      "period": "Set 2025 - In corso",
+      "grade": "",
+      "coursework": [
+        "Strutture dati e algoritmi",
+        "Programmazione orientata agli oggetti",
+        "Basi di dati",
+        "Algebra lineare",
+        "Statistica ed elaborazione dei dati"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "HMRC CT600 Integration",
+      "description": "Integrazione per il reporting e l'invio della Corporation Tax del Regno Unito",
+      "tech": ["Python", "Frappe", "XML", "iXBRL", "REST APIs"],
+      "url": "",
+      "points": [
+        "Sviluppo dei componenti principali di un'integrazione per l'elaborazione dei dati della Corporation Tax del Regno Unito e il supporto ai flussi di reporting CT600.",
+        "Elaborazione di documenti XML e iXBRL per i calcoli fiscali e i relativi bilanci.",
+        "Contributo ai flussi di invio telematico, incluse le interazioni con HMRC Gateway, le ricevute di invio, il polling e l'elaborazione relativa all'IRmark.",
+        "Completamento di oltre l'80% del lavoro di sviluppo intrapreso prima di lasciare il progetto; l'integrazione nel suo complesso non è stata completata."
+      ]
+    },
+    {
+      "name": "Construction Management System",
+      "description": "Flussi di lavoro aziendali e gestione dei cantieri",
+      "tech": [
+        "Python",
+        "Frappe",
+        "ERPNext",
+        "JavaScript",
+        "Vue.js",
+        "MariaDB"
+      ],
+      "url": "",
+      "points": [
+        "Sviluppo di un'applicazione per la gestione dei cantieri con frontend Vue.js e backend Frappe.",
+        "Implementazione di logica di business e workflow specifici del settore edile a supporto dei processi operativi.",
+        "Integrazione delle funzionalità frontend con i servizi applicativi e i modelli dati del backend."
+      ]
+    },
+    {
+      "name": "UK Address Lookup and Validation",
+      "description": "Integrazione per la validazione degli indirizzi in Frappe/ERPNext",
+      "tech": [
+        "Python",
+        "Frappe",
+        "JavaScript",
+        "REST APIs",
+        "Ideal Postcodes"
+      ],
+      "url": "https://docs.ideal-postcodes.co.uk/docs/postcode-lookup/",
+      "points": [
+        "Integrazione della ricerca e validazione degli indirizzi di Ideal Postcodes nei flussi di gestione clienti di Frappe/ERPNext.",
+        "Riduzione del tempo di creazione e validazione degli indirizzi dei clienti da circa 2 minuti a 30 secondi, pari a una riduzione del 75%.",
+        "Maggiore efficienza nell'inserimento degli indirizzi grazie alla riduzione dell'inserimento manuale e alla ricerca tramite codice postale."
+      ]
+    },
+    {
+      "name": "Frappe/ERPNext Business Applications",
+      "description": "Applicazioni ERP personalizzate e automazione dei processi aziendali",
+      "tech": ["Python", "Frappe", "ERPNext", "JavaScript", "MariaDB", "SQL"],
+      "url": "",
+      "points": [
+        "Sviluppo e personalizzazione di oltre 15 applicazioni Frappe con più di 120 DocType.",
+        "Realizzazione di oltre 20 report e implementazione di workflow aziendali per applicazioni in ambito immobiliare, HRMS, POS e manutenzione.",
+        "Implementazione di permessi personalizzati, formati di stampa, script e report per estendere le funzionalità standard di ERPNext.",
+        "Attività di migrazione dei database, manutenzione applicativa e automazione dei processi aziendali."
+      ]
+    }
+  ],
+  "achievements": [
+    "Vincitore di DevHackathon, giugno 2023.",
+    "Menzione d'onore all'8th Ethiopian Collegiate Programming Contest (ETHCPC).",
+    "Quarti di finale all'A2SV Generative AI Hackathon.",
+    "Certificazione HackerRank Python (Basic) conseguita a gennaio 2023."
+  ],
+  "activities": [
+    {
+      "title": "Organizzatore di competizioni di programmazione",
+      "description": "Comunità universitaria etiope di programmazione competitiva",
+      "items": [
+        "Contributo all'organizzazione di competizioni universitarie di programmazione per tre anni.",
+        "Partecipazione ad attività di programmazione competitiva e di problem solving tecnico."
+      ]
+    },
+    {
+      "title": "Sicurezza e pratica CTF",
+      "description": "Sicurezza applicativa e sfide Capture the Flag",
+      "items": [
+        "Pratica con sfide Capture the Flag per rafforzare le capacità di analisi della sicurezza e di problem solving.",
+        "Studio della OWASP Top 10 e delle vulnerabilità più comuni delle applicazioni web."
+      ]
+    }
+  ],
+  "contact": {
+    "message": "Sono interessato a opportunità nel backend engineering e a collaborare a progetti software significativi. Non esitare a contattarmi.",
+    "calendlyUrl": ""
+  }
+}

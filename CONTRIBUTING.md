@@ -53,7 +53,7 @@ Thanks for your interest in contributing! This is a personal portfolio template,
 
 - Use Tailwind utility classes — avoid custom CSS unless necessary
 - Keep components small and focused
-- All content should come from `src/data/portfolio.json`, not hardcoded in components
+- All content should come from `src/data/portfolio.en.json` / `portfolio.it.json`, not hardcoded in components (run `pnpm validate:i18n` after editing them)
 - Use explicit `dark:` variants for dark mode (no CSS variables for colors)
 - Prefer `neutral-*` color scale for consistency
 

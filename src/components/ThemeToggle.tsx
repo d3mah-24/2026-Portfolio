@@ -15,7 +15,7 @@ function getServerSnapshot() {
   return false;
 }
 
-export function ThemeToggle() {
+export function ThemeToggle({ label }: { label: string }) {
   const dark = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   const toggle = useCallback(() => {
@@ -29,7 +29,7 @@ export function ThemeToggle() {
     <button
       onClick={toggle}
       className="w-10 h-10 flex items-center justify-center rounded-full border border-neutral-200 dark:border-neutral-800 text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-200"
-      aria-label="Toggle theme"
+      aria-label={label}
     >
       {dark ? (
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">

@@ -1,108 +1,119 @@
 import type { Metadata } from "next";
-import { Inter, Fira_Code } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
-import data from "@/data/portfolio.json";
+import { ThemeScript } from "@/components/ThemeScript";
+import { inter, firaCode } from "@/lib/fonts";
+import { locales, resolveLocale, type Locale } from "@/lib/i18n";
+import { getCurrentWork, getPortfolio } from "@/lib/portfolio";
 import { siteUrl } from "@/lib/site";
-import { currentWork } from "@/lib/portfolio";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
+type LayoutProps = Readonly<{
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+}>;
 
-const firaCode = Fira_Code({
-  variable: "--font-fira-code",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-});
+// Only /en and /it exist (prerendered). Every other URL, including /xx and
+// /en/missing, is a 404 served by app/global-not-found.tsx.
+export const dynamicParams = false;
 
-const fullName = `${data.personal.name.first} ${data.personal.name.last}`;
-const pageTitle = `${fullName} | ${data.personal.title}`;
-const MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
 
-// "Sep 2025" → "2025-09", "2024" → "2024"; anything else (e.g. "Present") → undefined
-function toIsoDate(value: string) {
+const MONTHS: Record<Locale, string[]> = {
+  en: ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"],
+  it: ["gen", "feb", "mar", "apr", "mag", "giu", "lug", "ago", "set", "ott", "nov", "dic"],
+};
+
+// "Sep 2025" (en) / "Set 2025" (it) → "2025-09", "2024" → "2024"; anything else (e.g. "Present") → undefined
+function toIsoDate(value: string, locale: Locale) {
   const year = value.match(/\b(\d{4})\b/)?.[1];
   if (!year) return undefined;
-  const month = MONTHS.indexOf(value.trim().slice(0, 3).toLowerCase());
+  const prefix = value.trim().slice(0, 3).toLowerCase();
+  const month = MONTHS[locale].indexOf(prefix);
   return month === -1 ? year : `${year}-${String(month + 1).padStart(2, "0")}`;
 }
 
 // "Sep 2025 - Present" / "Feb 2024 — Sep 2025" / "2024" → ISO start and (optional) end
-function parsePeriod(period: string) {
+function parsePeriod(period: string, locale: Locale) {
   const [start, end] = period.split(/\s+[—–-]\s+/);
-  const startDate = toIsoDate(start);
-  const endDate = end && toIsoDate(end);
+  const startDate = toIsoDate(start, locale);
+  const endDate = end && toIsoDate(end, locale);
   return {
     ...(startDate && { startDate }),
     ...(endDate && { endDate }),
   };
 }
 
-const { address, handle } = data.personal;
+export async function generateMetadata({
+  params,
+}: Pick<LayoutProps, "params">): Promise<Metadata> {
+  const locale = await resolveLocale(params);
+  const data = getPortfolio(locale);
+  const fullName = `${data.personal.name.first} ${data.personal.name.last}`;
+  const pageTitle = `${fullName} | ${data.personal.title}`;
+  const ogImage = {
+    url: `/${locale}/og.png`,
+    width: 1200,
+    height: 630,
+    alt: `${fullName} — ${data.personal.title}`,
+  };
 
-export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title: pageTitle,
-  description: data.personal.bio,
-  authors: [{ name: fullName }],
-  creator: fullName,
-  keywords: [
-    fullName,
-    `${fullName} portfolio`,
-    `${fullName} ${data.personal.title}`,
-    "python backend developer",
-    "backend developer",
-    "Software Engineer",
-    "django developer",
-    "frappe developer",
-    "erpnext developer",
-  ],
-  alternates: {
-    canonical: siteUrl,
-  },
-  icons: {
-    icon: "/icon.svg",
-    apple: "/logo.png",
-  },
-  openGraph: {
+  return {
+    metadataBase: new URL(siteUrl),
     title: pageTitle,
     description: data.personal.bio,
-    url: siteUrl,
-    siteName: fullName,
-    type: "website",
-    locale: "en_US",
-    images: [
-      {
-        url: "/opengraph-image",
-        width: 1200,
-        height: 630,
-        alt: `${fullName} — ${data.personal.title}`,
+    authors: [{ name: fullName }],
+    creator: fullName,
+    keywords: data.seo.keywords,
+    alternates: {
+      canonical: `/${locale}`,
+      languages: {
+        ...Object.fromEntries(locales.map((l) => [l, `/${l}`])),
+        "x-default": "/en",
       },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: pageTitle,
-    description: data.personal.bio,
-    images: ["/opengraph-image"],
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+    },
+    icons: {
+      icon: "/icon.svg",
+      apple: "/logo.png",
+    },
+    openGraph: {
+      title: pageTitle,
+      description: data.personal.bio,
+      url: `/${locale}`,
+      siteName: fullName,
+      type: "website",
+      locale: data.seo.ogLocale,
+      alternateLocale: locales
+        .filter((l) => l !== locale)
+        .map((l) => getPortfolio(l).seo.ogLocale),
+      images: [ogImage],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: pageTitle,
+      description: data.personal.bio,
+      images: [ogImage],
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default async function RootLayout({ children, params }: LayoutProps) {
+  const locale = await resolveLocale(params);
+  const data = getPortfolio(locale);
+  const currentWork = getCurrentWork(data);
+  const { address, handle } = data.personal;
+  const fullName = `${data.personal.name.first} ${data.personal.name.last}`;
+  const pageUrl = `${siteUrl}/${locale}`;
+
   return (
     <html
-      lang="en"
+      lang={locale}
       className={`${inter.variable} ${firaCode.variable}`}
       suppressHydrationWarning
     >
@@ -110,21 +121,10 @@ export default function RootLayout({
         <link
           rel="alternate"
           type="text/plain"
-          href="/llms.txt"
+          href={`/${locale}/llms.txt`}
           title="LLM Information"
         />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                var t = localStorage.getItem('theme');
-                if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                  document.documentElement.classList.add('dark');
-                }
-              })();
-            `,
-          }}
-        />
+        <ThemeScript />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -133,13 +133,13 @@ export default function RootLayout({
               "@type": "WebSite",
               name: fullName,
               ...(handle && { alternateName: handle }),
-              url: siteUrl,
+              url: pageUrl,
               description: data.personal.bio,
-              inLanguage: "en-US",
+              inLanguage: locale,
               publisher: {
                 "@type": "Person",
                 name: fullName,
-                url: siteUrl,
+                url: pageUrl,
               },
             }),
           }}
@@ -154,7 +154,7 @@ export default function RootLayout({
               givenName: data.personal.name.first,
               familyName: data.personal.name.last,
               ...(handle && { alternateName: handle }),
-              url: siteUrl,
+              url: pageUrl,
               ...(data.personal.imagePath && {
                 image: `${siteUrl}${data.personal.imagePath}`,
               }),
@@ -244,7 +244,7 @@ export default function RootLayout({
                     name: e.institution,
                     address: e.location,
                   },
-                  ...parsePeriod(e.period),
+                  ...parsePeriod(e.period, locale),
                   roleName: e.degree,
                 }),
               ),

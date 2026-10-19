@@ -6,16 +6,17 @@
 [![Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000?logo=vercel)](https://vercel.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-A minimal, monochrome developer portfolio built with Next.js, Tailwind CSS, and TypeScript. All content is driven from a single `portfolio.json` file — fork it, update the JSON, and deploy your own.
+A minimal, monochrome developer portfolio built with Next.js, Tailwind CSS, and TypeScript. All content is driven from one JSON file per language (English and Italian) — fork it, update the JSON, and deploy your own.
 
 Based on [OliFarhaan/backend-portfolio](https://github.com/OliFarhaan/backend-portfolio).
 
 ## Features
 
-- **JSON-driven content** — All portfolio data lives in `src/data/portfolio.json`. No need to touch components.
+- **JSON-driven content** — All portfolio data lives in `src/data/portfolio.en.json` and `src/data/portfolio.it.json`. No need to touch components.
+- **English + Italian** — Pages at `/en` and `/it` (`/` redirects to `/en`), a language switcher that keeps the current section (`/en#projects` → `/it#projects`), and per-language metadata, canonical URLs, hreflang and sitemap entries.
 - **Dark mode** — System-aware with manual toggle, flicker-free via inline script.
 - **SEO optimized** — OpenGraph image, JSON-LD Person schema, sitemap, robots.txt, canonical URL.
-- **LLM-friendly** — Dynamic `/llms.txt` route auto-generated from `portfolio.json`. When LLM crawlers visit your site, they get a structured, always-up-to-date summary of your profile (see [LLM Discoverability](#seo--llm-discoverability)).
+- **LLM-friendly** — Dynamic `/llms.txt` route auto-generated from the portfolio JSON (`/llms.txt` and `/en/llms.txt` in English, `/it/llms.txt` in Italian). When LLM crawlers visit your site, they get a structured, always-up-to-date summary of your profile (see [LLM Discoverability](#seo--llm-discoverability)).
 - **OG image** — Auto-generated at build time from your portfolio data using Next.js `ImageResponse`.
 - **Vercel Analytics** — Speed Insights + Web Analytics built in.
 - **Responsive** — Mobile-first design with monospace typography.
@@ -43,9 +44,9 @@ Open [http://localhost:3000](http://localhost:3000) to see the result.
 
 ## Customization
 
-### portfolio.json
+### portfolio.en.json / portfolio.it.json
 
-All content is in [`src/data/portfolio.json`](src/data/portfolio.json). Update these sections to make it yours:
+All content is in [`src/data/portfolio.en.json`](src/data/portfolio.en.json) and its Italian twin [`src/data/portfolio.it.json`](src/data/portfolio.it.json). Both files must have the same structure and the same facts (dates, URLs, companies, tech stacks) — only human-readable text differs. Run `pnpm validate:i18n` after editing them. Update these sections to make it yours:
 
 | Section | Description |
 |---|---|
@@ -65,7 +66,7 @@ The resume PDF goes in `public/` — update the `resumePath` field in the JSON t
 
 ### Adding a New Project
 
-Add an entry to the `projects` array in `portfolio.json`:
+Add an entry to the `projects` array in both `portfolio.en.json` and `portfolio.it.json`:
 
 ```json
 {
@@ -100,7 +101,7 @@ Add an entry to the `experience` array:
 
 ### Customizing the Footer
 
-The footer displays `personal.footerName` with the current year, and a "Get it here" link using `personal.repoUrl`. Update these fields in `portfolio.json`:
+The footer displays `personal.footerName` with the current year, and a "Get it here" link using `personal.repoUrl`. Update these fields in both locale files:
 
 ```json
 {
@@ -121,7 +122,7 @@ Add entries to the `socials` array. The label is used as display text:
 
 ### Updating Site Metadata
 
-The page title, description, and OG image are all derived from `portfolio.json`:
+The page title, description, and OG image are all derived from the locale's JSON file:
 
 - **Title** — `{personal.name.first} {personal.name.last} | {personal.title}`
 - **Description** — `personal.bio`
@@ -129,7 +130,7 @@ The page title, description, and OG image are all derived from `portfolio.json`:
 
 ### Changing the Monospace Font
 
-The portfolio uses [Fira Code](https://github.com/tonsky/FiraCode) as the monospace font. To change it, update the font import in `src/app/layout.tsx`:
+The portfolio uses [Fira Code](https://github.com/tonsky/FiraCode) as the monospace font. To change it, update the font import in `src/lib/fonts.ts`:
 
 ```tsx
 import { Fira_Code } from "next/font/google";
@@ -156,24 +157,33 @@ Set these in `.env.local` for local development and in your Vercel project setti
 ```
 src/
 ├── app/
+│   ├── [locale]/
+│   │   ├── layout.tsx           # Root layout per language: <html lang>, metadata, hreflang, JSON-LD
+│   │   ├── page.tsx             # Main portfolio page (all sections)
+│   │   ├── og.png/route.tsx     # Auto-generated OG image per language (/en/og.png, /it/og.png)
+│   │   └── llms.txt/route.ts    # /en/llms.txt and /it/llms.txt
+│   ├── global-not-found.tsx # Bilingual 404 for every unknown URL (e.g. /xx, /en/missing)
 │   ├── globals.css          # Global styles, grid bg, shimmer animation
 │   ├── icon.svg             # Favicon
-│   ├── layout.tsx           # Root layout, metadata, JSON-LD, analytics, widget
-│   ├── llms.txt/route.ts    # Dynamic /llms.txt generated from portfolio.json
-│   ├── opengraph-image.tsx  # Auto-generated OG image
-│   ├── page.tsx             # Main portfolio page (all sections)
+│   ├── llms.txt/route.ts    # /llms.txt (English)
 │   ├── robots.ts            # robots.txt configuration
 │   └── sitemap.ts           # Sitemap configuration
 ├── components/
 │   ├── CrossLine.tsx        # Divider line with + markers
+│   ├── LanguageSwitcher.tsx # EN | IT switch that keeps the #section
 │   ├── Nav.tsx              # Responsive navbar with mobile menu
+│   ├── NotFoundView.tsx     # Shared bilingual 404 content
 │   ├── Section.tsx          # Reusable section wrapper
 │   ├── Terminal.tsx         # Terminal-style component in hero
 │   └── ThemeToggle.tsx      # Dark mode toggle (useSyncExternalStore)
 ├── data/
-│   └── portfolio.json       # All portfolio content
+│   ├── portfolio.en.json    # All portfolio content (English)
+│   └── portfolio.it.json    # All portfolio content (Italian)
 ├── lib/
-│   ├── portfolio.ts         # Typed helpers over portfolio.json
+│   ├── fonts.ts             # Inter + Fira Code
+│   ├── i18n.ts              # Supported locales (en, it)
+│   ├── llms.ts              # Builds llms.txt for a locale
+│   ├── portfolio.ts         # Loads the JSON for a locale
 │   └── site.ts              # Site URL (SITE_URL / Vercel production domain)
 public/
 ├── logo.png                 # Apple touch icon (180×180)
@@ -189,7 +199,7 @@ The site includes several layers for search engines and LLM crawlers:
 - **OpenGraph & Twitter cards** — Auto-generated image with your name, title, and bio
 - **JSON-LD** — `Person` structured data for rich search results
 - **Sitemap & robots.txt** — Standard crawling directives, all user agents allowed
-- **`/llms.txt`** — A dynamically generated plain-text file following the [llms.txt standard](https://llmstxt.org/). It's auto-generated from `portfolio.json` so it never goes stale. Discoverable via a `<link rel="alternate">` tag in the HTML head. Contains your full profile: about, skills, experience, education, projects, achievements, activities, and contact info — structured for LLMs to consume.
+- **`/llms.txt`** — A dynamically generated plain-text file following the [llms.txt standard](https://llmstxt.org/). It's auto-generated from the locale JSON files so it never goes stale; `/it/llms.txt` serves the Italian version. Discoverable via a `<link rel="alternate">` tag in the HTML head. Contains your full profile: about, skills, experience, education, projects, achievements, activities, and contact info — structured for LLMs to consume.
 
 ## Deployment
 
